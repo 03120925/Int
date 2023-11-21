@@ -1,0 +1,110 @@
+package grupo_6_segundo_avance;
+
+import javax.swing.JOptionPane;
+
+public class Grupo_6_Segundo_Avance {
+
+    public static void main(String[] args) {
+
+        Nuevo_Producto[] productos = new Nuevo_Producto[100];
+        Nueva_Marca[] marcas = new Nueva_Marca[100];
+        Nueva_Categoria[] categorias = new Nueva_Categoria[100];
+
+        String menuPrincipal = "Digite una opcion\n1.Registro\n2.Ver inventario\n3.Registrar una venta\n4.Gestionar productos\n5.Salir";
+        String menuProductos = "Digite una opcion\n1.Registrar nueva marca\n2.Registrar una categoria\n3.Registar un producto\n4.Regresar al menu principal ";
+        String menuInventario = "Digite una opcion\n1.Filtrar por categoría\n2.Regresar";
+        String menuCategoria = "Digite una opcion\n1.Filtrar por marca\n2.Regresar";
+        int opc = 0;
+        boolean bandera = false;
+        int numeroMarca = 0;
+        int numeroCategoria = 0;
+        int numeroProducto = 0;
+
+        while (!bandera) {
+            opc = Integer.parseInt(JOptionPane.showInputDialog(menuPrincipal));
+            if (opc == 1) {
+                String nombre = JOptionPane.showInputDialog("Ingrese su nombre");
+                JOptionPane.showMessageDialog(null, "Bienvenido, " + nombre);
+            } else if (opc == 2) {
+                for (int i = 0; i < numeroProducto; i++) {
+                    JOptionPane.showMessageDialog(null, productos[i].MostrarDatos());
+                }
+                boolean banderaInventario = false;
+                while (!banderaInventario) {
+                    opc = Integer.parseInt(JOptionPane.showInputDialog(menuInventario));
+                    if (opc == 1) {
+                        String nombreCategoria = JOptionPane.showInputDialog("Ingrese el nombre de la categoría");
+                        for (int i = 0; i < numeroProducto; i++) {
+                            if (productos[i].getCategoria().equals(nombreCategoria)) {
+                                JOptionPane.showMessageDialog(null, productos[i].MostrarDatos());
+                            }
+                        }
+                        boolean banderaCategoria = false;
+                        while (!banderaCategoria) {
+                            opc = Integer.parseInt(JOptionPane.showInputDialog(menuCategoria));
+                            if (opc == 1) {
+                                String nombreMarca = JOptionPane.showInputDialog("Ingrese el nombre de la marca");
+                                for (int i = 0; i < numeroProducto; i++) {
+                                    if (productos[i].getCategoria().equals(nombreCategoria) && productos[i].getMarca().equals(nombreMarca)) {
+                                        JOptionPane.showMessageDialog(null, productos[i].MostrarDatos());
+                                    }
+                                }
+                            } else if (opc == 2) {
+                                banderaCategoria = true;
+                            }
+                        }
+                    } else if (opc == 2) {
+                        banderaInventario = true;
+                    }
+                }
+            } else if (opc == 3) {
+                String venta = JOptionPane.showInputDialog("Ingrese los detalles de la venta");
+                JOptionPane.showMessageDialog(null, "Venta registrada: " + venta);
+            } else if (opc == 4) {
+                boolean banderaProductos = false;
+                while (!banderaProductos) {
+                    opc = Integer.parseInt(JOptionPane.showInputDialog(menuProductos));
+
+                    if (opc == 1) {
+                        String nombreMarca = JOptionPane.showInputDialog("Ingrese el nombre de la nueva marca");
+                        if (numeroMarca < marcas.length) {
+                            marcas[numeroMarca] = new Nueva_Marca(nombreMarca);
+                            JOptionPane.showMessageDialog(null, "Marca registrada con éxito.");
+                            numeroMarca++;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pueden agregar más marcas.");
+                        }
+
+                    } else if (opc == 2) {
+                        String nombreCategoria = JOptionPane.showInputDialog("Ingrese el nombre de la nueva categoria");
+                        if (numeroCategoria < categorias.length) {
+                            categorias[numeroCategoria] = new Nueva_Categoria(nombreCategoria);
+                            JOptionPane.showMessageDialog(null, "Categoría registrada con éxito.");
+                            numeroCategoria++;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pueden agregar más categorías.");
+                        }
+                    } else if (opc == 3) {
+                        String nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del nuevo producto");
+                        String precioProducto = JOptionPane.showInputDialog("Ingrese el precio del nuevo producto");
+                        String nombreMarca = JOptionPane.showInputDialog("Ingrese el nombre de la marca del producto");
+                        String nombreCategoria = JOptionPane.showInputDialog("Ingrese el nombre de la categoría del producto");
+
+                        if (numeroProducto < productos.length) {
+                            productos[numeroProducto] = new Nuevo_Producto(nombreProducto, Double.parseDouble(precioProducto), nombreMarca, nombreCategoria);
+                            productos[numeroProducto].MostrarDatos();
+                            JOptionPane.showMessageDialog(null, "Producto registrado con éxito.");
+                            numeroProducto++;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pueden agregar más productos.");
+                        }
+                    } else if (opc == 4) {
+                        banderaProductos = true;
+                    }
+                }
+            } else if (opc == 5) {
+                bandera = true;
+            }
+        }
+    }
+}
