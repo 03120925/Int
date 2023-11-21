@@ -1,0 +1,62 @@
+package grupo_6_segundo_avance;
+
+import javax.swing.JOptionPane;
+
+public class Nuevo_Producto {
+
+    String nombre;
+    double precio;
+    String marca;
+
+    public Nuevo_Producto(String nombre, double precio, String marca, String categoria) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.marca = marca;
+
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String MostrarDatos() {
+        return "Nombre del producto: " + this.nombre + ", Precio: " + this.precio + ", Marca: " + this.nombre + ", Categoría: " + this.nombre;
+    }
+
+    public String AlmacenarDatos() {
+        String datos = "Nombre: " + this.nombre + ", Precio: " + this.precio + ", Marca: " + this.marca;
+        JOptionPane.showMessageDialog(null, datos);
+        return datos;
+    }
+
+    private Object categoria;
+
+    public Object getCategoria() {
+        return this.categoria;
+    }
+
+    public void setCategoria(Object categoria) {
+        this.categoria = categoria;
+    }
+
+}
